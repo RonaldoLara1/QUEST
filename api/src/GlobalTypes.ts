@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 export interface IUser {
     name: string;
     email: string;
-    lastNames: string;
+    lastName: string;
     password: string;
     rol: "administrator" | "client";
 }
