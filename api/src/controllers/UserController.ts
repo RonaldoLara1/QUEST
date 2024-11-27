@@ -29,14 +29,14 @@ export const registerUsers = async (req: Request, res: Response): Promise<void> 
             })
             return
         }
-       const user = await UserModel.create({
+        const user = await UserModel.create({
             name,
             lastName,
             email,
             password,
             rol
         })
-        const token = jwt.sign(JSON.stringify(user),"shhhh");
+        const token = jwt.sign(JSON.stringify(user), "shhhh");
 
         res.status(200).json({ msg: "Usuario registrado con exito!", token })
         return
@@ -45,4 +45,26 @@ export const registerUsers = async (req: Request, res: Response): Promise<void> 
         res.status(500).json({ msg: "Hubo un error al crear el usuario" })
         return
     }
+}
+
+export const singIn = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const user = await UserModel.findOne({ email: req.body.email, password: req.body.password })
+        if (!user) {
+            res.status(400).json({
+                msg:"No hay coincidencias en el sistema"
+            })
+            return;
+        }
+        const token = jwt.sign(JSON.stringify(user),"pocoyo");
+        res.status(200).json({ msg: "Sesion iniciada con exito", token})
+        return;
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: "Hubo un error al iniciar sesion"
+        })
+        return
+    }
+
 }
