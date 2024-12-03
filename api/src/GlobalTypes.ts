@@ -1,9 +1,9 @@
 import { Schema } from "mongoose";
 export interface IUser {
-    name: string;
-    email: string;
-    lastName: string;
-    password: string;
+    name: string,
+    email: string,
+    lastName: string,
+    password: string,
     rol: "administrator" | "client";
 }
 
@@ -14,7 +14,7 @@ export interface IQuestion {
     questionnaireId: Schema.Types.ObjectId | string;
 }
 
-export interface IQuestionnaires {
+export interface IQuestionnaire {
     title: string;
     description: string;
     userId: Schema.Types.ObjectId | string

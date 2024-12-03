@@ -1,9 +1,5 @@
 import { Schema, model } from "mongoose";
-
-interface IOption {
-    title: String,
-    questionId: Schema.Types.ObjectId | string;
-}
+import { IOption } from "../GlobalTypes";
 
 const OptionSchema = new Schema<IOption>({
     title: {

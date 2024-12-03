@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Card, Container, Form, Row, Col, Button, InputGroup, CloseButton, Tooltip, OverlayTrigger } from 'react-bootstrap'
 import { AnwerQuestionnaire } from './componentes/AnswerQuestionnaire';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export const CreateQuestionnaire = () => {
+    const navigate = useNavigate();
 
     const [showQuestionnaire, setShowQuestionnaire] = useState(false);
 
@@ -16,7 +19,8 @@ export const CreateQuestionnaire = () => {
                 options: ["Opción 1"],
                 isMandatory: false,
             }
-        ]
+        ],
+        userId: JSON.parse(localStorage.user)._id
     });
 
     const onChangeTitle = (e) => {
@@ -61,6 +65,7 @@ export const CreateQuestionnaire = () => {
     }
 
     const sendData = () => {
+        axios.post("http://localhost:4000/create-questionnaires", createQuestionnaire)
         console.log(createQuestionnaire);
     }
 
@@ -156,7 +161,7 @@ export const CreateQuestionnaire = () => {
                 <Col>
                     <Row>
                         <Col className='text-center'>
-                            <Button variant='success' onClick={() => sendData()}>Guardar cuestionario</Button>
+                            <Button   variant='success' onClick= {()=>navigate("/list-q", sendData())}>Guardar cuestionario</Button>
                         </Col>
                     </Row>
                 </Col>

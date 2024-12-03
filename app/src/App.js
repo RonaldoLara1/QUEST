@@ -16,12 +16,12 @@ const App = () => {
   }
 
   const onSubmit = async () => {
-    //Peticion a la DB
     try {
-      data.rol = "client"
-      await axios.post("http://localhost:4000/users/login", data)
-      alert("Inicio de sesion con exito")
-      navigate("/home")
+      const res = await axios.post("http://localhost:4000/users/login", data)
+      const user = res.data.user;
+      user.logined = true;
+      localStorage.user = JSON.stringify(user)
+      navigate("/list-q")
   } catch (error) {
       alert("Hubo un error")
   }
