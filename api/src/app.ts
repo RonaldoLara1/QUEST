@@ -1,7 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
-import {registerUsers, singIn } from "./controllers/UserController";
-/*import { sigin } from "jsonwebtoken";*/
+import { registerUsers, singIn } from "./controllers/UserController";
 import { createQuestionnaires } from "./controllers/QuestionnairesController";
 
 
@@ -17,8 +16,7 @@ app.get("/", (_req: Request, res: Response) => {
 })
 
 //Usuarios
-app.post("/users/create",registerUsers)
-app.post("/users/login",singIn)
-app.post("/create-questionnaires", createQuestionnaires)
-
+app.post("/register-user", registerUsers)
+app.post("/users/login", singIn)
+app.post("/create-questionnaires", createQuestionnaires )
 export default app;
